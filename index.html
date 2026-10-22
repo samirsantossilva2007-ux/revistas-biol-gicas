@@ -102,7 +102,7 @@ fbq('track','PageView');
   .hero .lead{max-width:640px;margin:28px auto 0;color:rgba(28,36,16,.75);font-size:16px;position:relative;z-index:3}
 
   .palco{position:relative;max-width:860px;margin:30px auto 0;padding:10px 0 18px}
-  .palco .mockup{position:relative;z-index:1;width:100%;max-width:680px;height:auto;margin:0 auto;animation:respirar 7s ease-in-out infinite;
+  .palco .mockup{position:relative;z-index:1;width:100%;max-width:680px;height:auto;margin:0 auto;
     filter:drop-shadow(0 16px 18px rgba(28,36,16,.25))}
   @keyframes respirar{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
   .palco .chao{position:absolute;left:50%;bottom:6px;width:52%;height:22px;translate:-50% 0;background:radial-gradient(ellipse,rgba(28,36,16,.22),transparent 70%)}
@@ -114,12 +114,9 @@ fbq('track','PageView');
   .d-microscopio{width:90px;height:112px;right:2%;bottom:6%;--r:6deg}
 
   /* Montagem: as peças de cada desenho chegam voando e se encaixam quando aparecem na tela */
-  [data-montar]{pointer-events:auto;cursor:pointer}
-  .peca{transform-box:fill-box;transform-origin:center;translate:var(--dx,0) var(--dy,0);rotate:var(--rot,0deg);scale:.15;opacity:0;
-    transition:translate .8s cubic-bezier(.34,1.56,.64,1),rotate .8s cubic-bezier(.34,1.56,.64,1),scale .8s cubic-bezier(.34,1.56,.64,1),opacity .35s ease;transition-delay:var(--atraso,0s)}
-  .montado .peca{translate:0 0;rotate:0deg;scale:1;opacity:1}
+  .peca{transform-box:fill-box;transform-origin:center;will-change:translate,rotate,scale,opacity}
   .estalo{position:absolute;inset:-14%;pointer-events:none;border-radius:50%;border:3px solid var(--amarelo);opacity:0;scale:.4}
-  .montado .estalo{animation:estalo .6s ease-out forwards;animation-delay:var(--fim,.9s)}
+  .montado .estalo{animation:estalo .6s ease-out forwards}
   @keyframes estalo{0%{opacity:.9;scale:.5}100%{opacity:0;scale:1.25}}
 
   .chips{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:28px}
@@ -157,7 +154,7 @@ fbq('track','PageView');
   .carrossel-track{display:flex;gap:26px;width:max-content;padding:26px 13px 34px;animation:rolar 80s linear infinite;transform-style:preserve-3d}
   .carrossel.rev .carrossel-track{animation:rolar-rev 90s linear infinite}
   .carrossel:hover .carrossel-track{animation-play-state:paused}
-  .capa{width:218px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:10px}
+  .capa{width:244px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:10px}
   .capa .livro{position:relative;width:100%;aspect-ratio:1/1.414;transform-style:preserve-3d;transform:rotateY(-18deg) rotateX(4deg);transition:transform .45s cubic-bezier(.2,.8,.2,1)}
   .carrossel.rev .capa .livro{transform:rotateY(18deg) rotateX(4deg)}
   .capa:hover .livro,.carrossel.rev .capa:hover .livro{transform:rotateY(0) rotateX(0) translateY(-10px) scale(1.07)}
@@ -167,7 +164,7 @@ fbq('track','PageView');
     background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.55) 45%,transparent 60%);background-size:250% 100%;background-position:120% 0;transition:background-position .8s}
   .capa:hover .livro::after{background-position:-40% 0}
   .capa .tema{background:var(--branco);border:1.5px solid var(--tinta);border-radius:999px;padding:3px 10px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em}
-  .capa .titulo{text-align:center;font-size:12px;font-weight:500;color:rgba(28,36,16,.7);line-height:1.3;max-width:200px}
+  .capa .titulo{text-align:center;font-size:12px;font-weight:500;color:rgba(28,36,16,.7);line-height:1.3;max-width:224px}
 
   /* ---------- BNCC ---------- */
   .bncc{overflow:hidden}
@@ -183,8 +180,30 @@ fbq('track','PageView');
   .passos{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:900px;margin:32px auto 0}
   .passo{background:var(--branco);border:1.5px solid var(--tinta);box-shadow:var(--sombra);border-radius:6px;padding:20px;display:flex;align-items:flex-start;gap:14px;text-align:left;height:100%}
   .passo .num{flex-shrink:0;width:48px;height:48px;border-radius:50%;background:var(--amarelo);border:1.5px solid var(--tinta);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:800;font-size:20px;box-shadow:inset -4px -4px 0 rgba(0,0,0,.12)}
-  .passo:hover .num{animation:girar3d .9s ease}
-  .passo p{font-size:14px;font-weight:500;line-height:1.55}
+  .passo{flex-wrap:wrap;transition:border-color .3s,box-shadow .3s,transform .3s}
+  .passo p{flex:1;min-width:0;font-size:14px;font-weight:500;line-height:1.55}
+  .passo .num{position:relative;transition:background .3s;perspective:400px}
+  .passo .num b,.passo .num svg{position:absolute;backface-visibility:hidden;transition:transform .55s cubic-bezier(.34,1.56,.64,1)}
+  .passo .num svg{width:24px;height:24px;transform:rotateY(180deg);color:#fff}
+  .passo .status{flex-basis:100%;display:flex;align-items:center;gap:8px;margin-top:4px;padding-top:12px;border-top:1px dashed rgba(28,36,16,.2);
+    font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:rgba(28,36,16,.45)}
+  .passo .status .ponto{width:9px;height:9px;border-radius:50%;background:rgba(28,36,16,.25);animation:piscar-ponto 1s ease-in-out infinite}
+  .passo .status .ok{display:none}
+  @keyframes piscar-ponto{50%{opacity:.25}}
+  .passo.feito{box-shadow:4px 4px 0 0 var(--verde);transform:translateY(-3px)}
+  .passo.feito .num{background:var(--verde)}
+  .passo.feito .num b{transform:rotateY(180deg)}
+  .passo.feito .num svg{transform:rotateY(0)}
+  .passo.feito .status{color:var(--verde)}
+  .passo.feito .status .ponto{display:none}
+  .passo.feito .status .ok{display:inline-flex;align-items:center;gap:6px;animation:carimbo .45s cubic-bezier(.34,1.56,.64,1)}
+  .passo.feito .status .espera{display:none}
+  @keyframes carimbo{0%{scale:2.2;opacity:0}100%{scale:1;opacity:1}}
+  .progresso{max-width:900px;margin:22px auto 0;display:flex;align-items:center;gap:14px;text-align:left}
+  .progresso .trilho{flex:1;height:14px;background:#fff;border:1.5px solid var(--tinta);border-radius:999px;overflow:hidden;box-shadow:var(--sombra-sm)}
+  .progresso .barra{height:100%;width:0;background:repeating-linear-gradient(-45deg,var(--verde-claro) 0 10px,var(--verde) 10px 20px);transition:width .5s ease}
+  .progresso .rotulo{min-width:150px;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;font-variant-numeric:tabular-nums}
+  .progresso.completo .rotulo{color:var(--verde)}
   .d-globo{width:110px;height:110px;left:2%;top:40px}
   .d-dna2{width:80px;height:170px;right:2%;top:60px}
 
@@ -204,7 +223,8 @@ fbq('track','PageView');
   .bonus .desc{margin-top:8px;flex:1;font-size:12px;color:rgba(246,248,236,.7);line-height:1.55}
   .bonus .rodape{margin-top:14px;padding-top:12px;border-top:1px solid rgba(246,248,236,.12);display:flex;flex-direction:column;gap:4px;font-size:11px;color:rgba(246,248,236,.6)}
   .bonus .rodape b{color:var(--amarelo)}
-  .d-presente{width:110px;height:120px;right:3%;top:40px}
+  .presente-cena{width:min(340px,100%);margin:40px auto 26px;filter:drop-shadow(5px 6px 0 #0c1804)}
+  .presente-cena svg{display:block;width:100%;height:auto;overflow:visible}
   .d-estrela{width:40px;height:40px}
 
   /* ---------- Planos ---------- */
@@ -316,7 +336,8 @@ fbq('track','PageView');
     .dores-grid{grid-template-columns:1fr}
     .cta-btn{width:100%;padding:16px 18px;font-size:15px}
     .chip{font-size:13px}
-    .capa{width:172px}
+    .capa{width:206px}
+    .carrossel-track{gap:20px}
     .bonus{flex-basis:100%}
     .d-borboleta{display:none}
     .d-lupa,.d-lampada,.d-globo,.d-dna2,.d-presente{display:none}
@@ -345,60 +366,9 @@ fbq('track','PageView');
     <p class="lead">Transforme os grandes temas e descobertas da Biologia em edições de revista de alto impacto visual. Estimule o pensamento científico, o debate e o fascínio dos seus alunos desde o primeiro minuto da aula.</p>
 
     <div class="palco">
-      <!-- DNA 3D desenhado (canvas) -->
-      <div class="doodle d-dna"><canvas data-dna></canvas></div>
-
-      <!-- Célula cartoon -->
-      <div class="doodle d-celula float" style="--r:6deg">
-        <svg viewBox="0 0 120 120">
-          <path d="M60 8c26 0 50 18 52 46s-18 56-50 56S6 92 8 58 34 8 60 8z" fill="#c9eb9c" stroke="#1c2410" stroke-width="3.5"/>
-          <path d="M60 8c26 0 50 18 52 46" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".6" transform="translate(-6 8) scale(.9)"/>
-          <g class="orbita"><ellipse cx="26" cy="64" rx="10" ry="5" fill="#f28b82" stroke="#1c2410" stroke-width="2.5"/></g>
-          <g class="orbita rev"><ellipse cx="88" cy="40" rx="9" ry="5" fill="#5bc0eb" stroke="#1c2410" stroke-width="2.5"/><circle cx="82" cy="86" r="5" fill="#f2b81c" stroke="#1c2410" stroke-width="2.5"/></g>
-          <g class="nucleo"><circle cx="58" cy="60" r="20" fill="#b388eb" stroke="#1c2410" stroke-width="3.5"/><circle cx="52" cy="54" r="5" fill="#fff" opacity=".7"/></g>
-          <g class="olho"><ellipse cx="50" cy="60" rx="3.5" ry="5" fill="#1c2410"/><ellipse cx="66" cy="60" rx="3.5" ry="5" fill="#1c2410"/></g>
-          <path d="M51 69q7 6 14 0" fill="none" stroke="#1c2410" stroke-width="2.5" stroke-linecap="round"/>
-        </svg>
-      </div>
-
-      <!-- Borboleta voando -->
-      <div class="doodle d-borboleta">
-        <svg viewBox="0 0 62 50">
-          <g class="asa-e"><path d="M31 25C20 4 2 4 4 18c1 9 14 10 27 7zM31 27C20 30 8 38 14 45c5 5 15-4 17-18z" fill="#f2b81c" stroke="#1c2410" stroke-width="2.5" stroke-linejoin="round"/><circle cx="14" cy="16" r="3" fill="#f28b82"/></g>
-          <g class="asa-d"><path d="M31 25C42 4 60 4 58 18c-1 9-14 10-27 7zM31 27C42 30 54 38 48 45c-5 5-15-4-17-18z" fill="#f2b81c" stroke="#1c2410" stroke-width="2.5" stroke-linejoin="round"/><circle cx="48" cy="16" r="3" fill="#f28b82"/></g>
-          <rect x="28.5" y="14" width="5" height="24" rx="2.5" fill="#1c2410"/>
-          <path d="M30 14q-4-8-8-9M32 14q4-8 8-9" stroke="#1c2410" stroke-width="2" fill="none" stroke-linecap="round"/>
-        </svg>
-      </div>
-
-      <!-- Folha balançando -->
-      <div class="doodle d-folha float" style="animation-duration:4s">
-        <svg viewBox="0 0 70 70"><g style="transform-origin:12px 60px;animation:balancar 3s ease-in-out infinite">
-          <path d="M12 60C8 30 30 6 64 6c2 30-18 56-52 54z" fill="#7bbf3a" stroke="#1c2410" stroke-width="3" stroke-linejoin="round"/>
-          <path d="M12 60C26 44 40 28 56 14M30 42l-4-14M42 30l10 2" stroke="#1c2410" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          <path d="M24 22q10-10 26-12" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" opacity=".55"/>
-        </g></svg>
-      </div>
-
       <img class="mockup" src="images/mockup-revistas.webp" width="1100" height="825" alt="Pilha de revistas Biologia em Desenhos prontas para imprimir">
       <div class="chao"></div>
 
-      <!-- Microscópio -->
-      <div class="doodle d-microscopio float" style="animation-duration:5.5s">
-        <svg viewBox="0 0 96 120">
-          <rect x="14" y="104" width="68" height="12" rx="4" fill="#24460e" stroke="#1c2410" stroke-width="3"/>
-          <path d="M60 104V86q0-18-18-22" fill="none" stroke="#1c2410" stroke-width="9" stroke-linecap="round"/>
-          <path d="M60 104V86q0-18-18-22" fill="none" stroke="#2f5d18" stroke-width="4" stroke-linecap="round"/>
-          <rect x="22" y="78" width="40" height="7" rx="2" fill="#f2b81c" stroke="#1c2410" stroke-width="2.5"/>
-          <g transform="rotate(-28 40 40)">
-            <rect x="30" y="10" width="20" height="56" rx="5" fill="#f6f8ec" stroke="#1c2410" stroke-width="3"/>
-            <rect x="26" y="4" width="28" height="10" rx="3" fill="#2f5d18" stroke="#1c2410" stroke-width="3"/>
-            <rect x="34" y="64" width="12" height="10" rx="2" fill="#5bc0eb" stroke="#1c2410" stroke-width="2.5"/>
-            <rect x="34" y="16" width="5" height="40" rx="2" fill="#fff"/>
-          </g>
-          <path class="brilho" d="M80 30l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" fill="#f2b81c" stroke="#1c2410" stroke-width="1.5"/>
-        </svg>
-      </div>
     </div>
 
     <div class="chips">
@@ -407,7 +377,7 @@ fbq('track','PageView');
       <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7M7.5 8a2.5 2.5 0 0 1 0-5C10 3 12 8 12 8s2-5 4.5-5a2.5 2.5 0 0 1 0 5"/></svg>Acesso Vitalício + 5 Bônus</span>
     </div>
 
-    <a href="#planos" class="cta-btn cta-verde pulse">
+    <a href="#previas" class="cta-btn cta-verde">
       Quero os +150 Revistas Biológicas
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
     </a>
@@ -465,7 +435,7 @@ fbq('track','PageView');
 </section>
 
 <!-- ============ AMOSTRA: DUAS FAIXAS DE REVISTAS ============ -->
-<section class="amostra">
+<section class="amostra" id="previas">
   <div class="wrap center" style="position:relative">
     <span class="selo">Amostra da biblioteca</span>
     <h2 class="h2" style="margin-top:24px">Uma prévia das nossas <span class="verde">Revistas Biológicas</span></h2>
@@ -504,10 +474,17 @@ fbq('track','PageView');
       <div class="etapa reveal"><h3>Ensino Médio</h3><p class="faixa-ano">1º ao 3º ano</p><div class="anos"><span>1º ano</span><span>2º ano</span><span>3º ano</span></div></div>
     </div>
     <h3 class="h3-passos">Como você vai receber o acesso</h3>
-    <div class="passos">
-      <div class="passo reveal"><span class="num">1</span><p>Você compra e confirma o pedido em poucos cliques</p></div>
-      <div class="passo reveal"><span class="num">2</span><p>O acesso chega no seu e-mail, com liberação imediata</p></div>
-      <div class="passo reveal"><span class="num">3</span><p>Você baixa em 1 clique e imprime em folha A4 pra usar amanhã</p></div>
+    <div class="passos" id="passos">
+      <div class="passo"><span class="num"><b>1</b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><p>Você compra e confirma o pedido em poucos cliques</p>
+        <span class="status"><i class="ponto"></i><span class="espera">Confirmando pedido…</span><span class="ok"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Concluído</span></span></div>
+      <div class="passo"><span class="num"><b>2</b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><p>O acesso chega no seu e-mail, com liberação imediata</p>
+        <span class="status"><i class="ponto"></i><span class="espera">Enviando e-mail…</span><span class="ok"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Concluído</span></span></div>
+      <div class="passo"><span class="num"><b>3</b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><p>Você baixa em 1 clique e imprime em folha A4 pra usar amanhã</p>
+        <span class="status"><i class="ponto"></i><span class="espera">Preparando download…</span><span class="ok"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Concluído</span></span></div>
+    </div>
+    <div class="progresso" id="progresso" aria-live="polite">
+      <div class="trilho"><div class="barra"></div></div>
+      <span class="rotulo">0% liberado</span>
     </div>
     <a href="#planos" class="cta-btn cta-verde" style="margin-top:40px">
       Quero os +150 Revistas Biológicas
@@ -518,21 +495,39 @@ fbq('track','PageView');
 
 <!-- ============ BÔNUS ============ -->
 <section class="escuro bonus-sec">
-  <div class="doodle d-presente float" style="filter:drop-shadow(4px 5px 0 #0c1804)">
-    <svg viewBox="0 0 110 120">
-      <rect x="14" y="54" width="82" height="60" rx="4" fill="#f2b81c" stroke="#1c2410" stroke-width="3.5"/>
-      <rect x="14" y="54" width="22" height="60" fill="#e0a20f" stroke="#1c2410" stroke-width="3.5"/>
-      <rect x="48" y="54" width="14" height="60" fill="#f28b82" stroke="#1c2410" stroke-width="3"/>
-      <g style="transform-origin:55px 50px;animation:pular-tampa 2.8s ease-in-out infinite">
-        <rect x="8" y="40" width="94" height="18" rx="4" fill="#f6f8ec" stroke="#1c2410" stroke-width="3.5"/>
-        <rect x="48" y="40" width="14" height="18" fill="#f28b82" stroke="#1c2410" stroke-width="3"/>
-        <path d="M55 40c-10-22-34-18-26-4 4 6 16 6 26 4zM55 40c10-22 34-18 26-4-4 6-16 6-26 4z" fill="#f28b82" stroke="#1c2410" stroke-width="3" stroke-linejoin="round"/>
-      </g>
-      <path class="brilho" d="M20 18l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="#fff" stroke="#1c2410" stroke-width="1.2"/>
-      <path class="brilho" style="animation-delay:1.2s" d="M92 14l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="#f2b81c" stroke="#1c2410" stroke-width="1.2"/>
-    </svg>
-  </div>
   <div class="wrap center">
+    <div class="presente-cena" id="presente" aria-hidden="true">
+      <svg viewBox="0 0 340 250">
+        <g id="brilhos" opacity="0">
+          <path d="M60 70l4 10 10 4-10 4-4 10-4-10-10-4 10-4z" fill="#f2b81c" stroke="#1c2410" stroke-width="2"/>
+          <path d="M282 60l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#fff" stroke="#1c2410" stroke-width="2"/>
+          <path d="M300 150l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" fill="#7bbf3a" stroke="#1c2410" stroke-width="2"/>
+          <path d="M40 160l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" fill="#f28b82" stroke="#1c2410" stroke-width="2"/>
+        </g>
+        <g id="caixa">
+          <!-- fundo/interior da caixa -->
+          <path d="M100 128h140v10H100z" fill="#0c1804" stroke="#1c2410" stroke-width="3"/>
+          <g id="cartoes"></g>
+          <!-- frente da caixa -->
+          <rect x="96" y="134" width="148" height="100" rx="5" fill="#f2b81c" stroke="#1c2410" stroke-width="4"/>
+          <rect x="96" y="134" width="30" height="100" fill="#e0a20f" stroke="#1c2410" stroke-width="4"/>
+          <rect x="160" y="134" width="20" height="100" fill="#f28b82" stroke="#1c2410" stroke-width="3"/>
+          <path d="M138 150q30-8 60 0" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round" opacity=".5"/>
+          <g id="rosto">
+            <ellipse cx="146" cy="186" rx="5" ry="7" fill="#1c2410"/><ellipse cx="194" cy="186" rx="5" ry="7" fill="#1c2410"/>
+            <circle cx="144" cy="183" r="1.8" fill="#fff"/><circle cx="192" cy="183" r="1.8" fill="#fff"/>
+            <path id="boca" d="M160 202q10 4 20 0" stroke="#1c2410" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+            <ellipse cx="136" cy="200" rx="6" ry="3.5" fill="#f28b82" opacity=".7"/><ellipse cx="204" cy="200" rx="6" ry="3.5" fill="#f28b82" opacity=".7"/>
+          </g>
+          <!-- tampa (gira na dobradiça da esquerda) -->
+          <g id="tampa">
+            <rect x="88" y="114" width="164" height="24" rx="5" fill="#f6f8ec" stroke="#1c2410" stroke-width="4"/>
+            <rect x="160" y="114" width="20" height="24" fill="#f28b82" stroke="#1c2410" stroke-width="3"/>
+            <path d="M170 114c-14-30-48-26-38-6 6 9 22 9 38 6zM170 114c14-30 48-26 38-6-6 9-22 9-38 6z" fill="#f28b82" stroke="#1c2410" stroke-width="3.5" stroke-linejoin="round"/>
+          </g>
+        </g>
+      </svg>
+    </div>
     <span class="selo">Exclusivo para esta oferta</span>
     <h2 class="h2" style="margin-top:24px">Você também recebe <span class="amarelo">5 Super Bônus</span></h2>
     <p class="sub" style="font-size:14px">Materiais de apoio criados para economizar ainda mais o seu tempo de preparação.</p>
@@ -788,40 +783,114 @@ document.querySelectorAll('[data-tilt]').forEach(card => {
   card.addEventListener('pointerleave', () => card.style.transform = '');
 });
 
-/* Desenhos que se montam: cada peça chega voando e se encaixa quando o desenho aparece.
-   Tocar/clicar no desenho desmonta e monta de novo. */
+/* =========================================================
+   ANIMAÇÕES LIGADAS À ROLAGEM
+   Tudo se monta conforme a pessoa desce a página (e desmonta se ela subir).
+   ========================================================= */
 const reduz = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const alvos = [...document.querySelectorAll('.doodle'), document.querySelector('.selo-garantia')];
-alvos.forEach(alvo => {
-  alvo.setAttribute('data-montar', '');
-  const svg = alvo.querySelector('svg');
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const mola = x => { const c = 1.7; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+const suave = x => x * x * (3 - 2 * x);
+
+/* Progresso de um elemento na tela: 0 quando o centro entra por baixo, 1 quando chega a ~45% da altura */
+function progresso(el, fim = 0.45){
+  if (reduz) return 1;
+  const r = el.getBoundingClientRect(), vh = innerHeight, centro = r.top + r.height / 2;
+  return clamp((vh - centro) / (vh * (1 - fim)));
+}
+
+const animadores = [];
+
+/* 1) Desenhos montados por peças */
+[...document.querySelectorAll('.doodle'), document.querySelector('.selo-garantia')].forEach(alvo => {
+  const svg = alvo.querySelector('svg'); let pecas = [];
   if (svg) {
     let pai = svg;
-    const filhos = [...svg.children].filter(n => n.tagName !== 'defs' && n.tagName !== 'style');
+    const filhos = [...svg.children].filter(n => !['defs','style'].includes(n.tagName));
     if (filhos.length === 1 && filhos[0].tagName === 'g') pai = filhos[0];
-    const pecas = [...pai.children].filter(n => n.tagName !== 'defs' && n.tagName !== 'style');
-    pecas.forEach((p, i) => {
+    pecas = [...pai.children].filter(n => !['defs','style'].includes(n.tagName)).map(p => {
       const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-      g.setAttribute('class', 'peca');
-      const ang = Math.random() * Math.PI * 2, dist = 50 + Math.random() * 50;
-      g.style.setProperty('--dx', Math.cos(ang) * dist + 'px');
-      g.style.setProperty('--dy', Math.sin(ang) * dist + 'px');
-      g.style.setProperty('--rot', (Math.random() * 240 - 120) + 'deg');
-      g.style.setProperty('--atraso', (i * 0.11) + 's');
-      pai.insertBefore(g, p); g.appendChild(p);
+      g.setAttribute('class', 'peca'); pai.insertBefore(g, p); g.appendChild(p);
+      const ang = Math.random() * Math.PI * 2, dist = 60 + Math.random() * 60;
+      return { g, dx: Math.cos(ang) * dist, dy: Math.sin(ang) * dist, rot: Math.random() * 260 - 130 };
     });
-    alvo.style.setProperty('--fim', (pecas.length * 0.11 + 0.5) + 's');
   }
   const anel = document.createElement('i'); anel.className = 'estalo'; alvo.appendChild(anel);
-  if (reduz) { alvo.classList.add('montado'); return; }
-  new IntersectionObserver(([e], obs) => {
-    if (e.isIntersecting) { alvo.classList.add('montado'); alvo.dispatchEvent(new Event('montar')); obs.disconnect(); }
-  }, { threshold: .35 }).observe(alvo);
-  alvo.addEventListener('click', () => {
-    alvo.classList.remove('montado');
-    setTimeout(() => { alvo.classList.add('montado'); alvo.dispatchEvent(new Event('montar')); }, 650);
+  const n = pecas.length;
+  animadores.push(() => {
+    const p = progresso(alvo);
+    pecas.forEach((pc, i) => {
+      const q = clamp((p - i / (n + 2)) / (3 / (n + 2))), e = mola(q);
+      pc.g.style.translate = `${(1 - e) * pc.dx}px ${(1 - e) * pc.dy}px`;
+      pc.g.style.rotate = `${(1 - e) * pc.rot}deg`;
+      pc.g.style.scale = String(0.15 + 0.85 * e);
+      pc.g.style.opacity = String(clamp(q * 3));
+    });
+    alvo.classList.toggle('montado', p >= 1);
+    alvo.dataset.prog = p;
   });
 });
+
+/* 2) Passos do acesso: cada um vira "Concluído" na sequência */
+(() => {
+  const box = document.getElementById('passos'), barra = document.querySelector('#progresso .barra'),
+        rot = document.querySelector('#progresso .rotulo'), prog = document.getElementById('progresso');
+  const passos = [...box.querySelectorAll('.passo')];
+  animadores.push(() => {
+    const p = progresso(box, 0.4);
+    let feitos = 0;
+    passos.forEach((el, i) => { const ok = p >= (i + 1) / (passos.length + 0.4); el.classList.toggle('feito', ok); if (ok) feitos++; });
+    const pct = Math.round(clamp(p * 1.15) * 100);
+    barra.style.width = pct + '%';
+    rot.textContent = feitos === passos.length ? 'Acesso liberado ✓' : pct + '% liberado';
+    prog.classList.toggle('completo', feitos === passos.length);
+  });
+})();
+
+/* 3) Caixa de presente: os 5 bônus caem dentro e a tampa fecha */
+(() => {
+  const cena = document.getElementById('presente'); if (!cena) return;
+  const NS = 'http://www.w3.org/2000/svg', grupo = cena.querySelector('#cartoes'),
+        tampa = cena.querySelector('#tampa'), caixa = cena.querySelector('#caixa'),
+        brilhos = cena.querySelector('#brilhos'), boca = cena.querySelector('#boca');
+  const cores = ['#7bbf3a','#5bc0eb','#f28b82','#b388eb','#f6f8ec'];
+  const origens = [[30,20],[310,10],[50,-40],[290,-50],[170,-80]];
+  const cards = cores.map((cor, i) => {
+    const g = document.createElementNS(NS, 'g');
+    g.innerHTML = `<rect x="-30" y="-21" width="60" height="42" rx="4" fill="${cor}" stroke="#1c2410" stroke-width="3"/>
+      <rect x="-30" y="-21" width="60" height="12" rx="3" fill="#1c2410"/>
+      <text x="0" y="-12" text-anchor="middle" font-family="Archivo,sans-serif" font-size="8" font-weight="800" fill="#f2b81c" letter-spacing="1">BÔNUS</text>
+      <text x="0" y="14" text-anchor="middle" font-family="'Playfair Display',serif" font-size="18" font-weight="800" fill="#1c2410">0${i + 1}</text>`;
+    grupo.appendChild(g); return g;
+  });
+  const bocaAberta = 'M158 198q12 14 24 0', bocaSorriso = 'M156 200q14 10 28 0';
+  animadores.push(() => {
+    const p = progresso(cena, 0.25);
+    // tampa abre (0–0.12), cartões caem (0.12–0.78), tampa fecha (0.8–0.9), brilho (0.9–1)
+    const abre = suave(clamp(p / 0.12)), fecha = suave(clamp((p - 0.8) / 0.1));
+    const ang = -118 * abre * (1 - fecha);
+    tampa.setAttribute('transform', `rotate(${ang} 88 138)`);
+    cards.forEach((c, i) => {
+      const ini = 0.12 + i * 0.12, q = clamp((p - ini) / 0.2);
+      const [sx, sy] = origens[i], ex = 170 + (i - 2) * 6, ey = 178;
+      const t = suave(q);
+      const x = sx + (ex - sx) * t, y = sy + (ey - sy) * t - Math.sin(t * Math.PI) * 50;
+      c.setAttribute('transform', `translate(${x} ${y}) rotate(${(1 - t) * (i % 2 ? 160 : -160)}) scale(${1 - 0.35 * t})`);
+      c.style.opacity = q <= 0 ? 0 : 1;
+    });
+    const pulo = Math.sin(clamp((p - 0.88) / 0.12) * Math.PI) * 10;
+    caixa.setAttribute('transform', `translate(0 ${-pulo})`);
+    brilhos.setAttribute('opacity', clamp((p - 0.9) / 0.1));
+    boca.setAttribute('d', p > 0.1 && p < 0.88 ? bocaAberta : bocaSorriso);
+  });
+})();
+
+/* Um único laço por quadro de rolagem */
+let pendente = false;
+const rodar = () => { pendente = false; animadores.forEach(fn => fn()); };
+addEventListener('scroll', () => { if (!pendente) { pendente = true; requestAnimationFrame(rodar); } }, { passive: true });
+addEventListener('resize', rodar);
+rodar();
 
 /* Hélice de DNA em 3D que se monta par por par */
 document.querySelectorAll('canvas[data-dna]').forEach(cv => {
@@ -830,19 +899,18 @@ document.querySelectorAll('canvas[data-dna]').forEach(cv => {
   let W, H, dpr;
   const medir = () => { dpr = devicePixelRatio || 1; W = cv.clientWidth; H = cv.clientHeight; cv.width = W*dpr; cv.height = H*dpr; };
   medir(); addEventListener('resize', medir);
-  let visivel = true, inicio = reduz ? -1e9 : null;
+  let visivel = true;
+  const dono = cv.closest('.doodle');
   new IntersectionObserver(([e]) => visivel = e.isIntersecting).observe(cv);
-  cv.closest('[data-montar]')?.addEventListener('montar', () => inicio = performance.now());
-  const molaFora = x => { const c = 1.9; return 1 + (c+1)*Math.pow(x-1,3) + c*Math.pow(x-1,2); };
-  function desenhar(t){
+    function desenhar(t){
     if (visivel) {
       ctx.setTransform(dpr,0,0,dpr,0,0); ctx.clearRect(0,0,W,H);
       const R = W*0.34, cx = W/2, passo = (H-24)/(pares-1), giro = t/900, itens = [];
-      const decorrido = inicio === null ? -1 : t - inicio;
+      const pr = dono ? +(dono.dataset.prog || 0) : 1;
       for (let i = 0; i < pares; i++) {
-        const prog = Math.min(1, Math.max(0, (decorrido - i*110) / 520));
+        const prog = clamp((pr - i / (pares + 3)) / (4 / (pares + 3)));
         if (prog <= 0) continue;
-        const k = molaFora(prog);                 // encaixe com "mola"
+        const k = mola(prog);                 // encaixe com "mola"
         const a = giro + i*0.62 + (1-prog)*3, y = 12 + i*passo, cor = cores[i%3];
         const p1 = { x:cx + Math.cos(a)*R*k, z:Math.sin(a), y:y - (1-prog)*40, c:cor[0], k };
         const p2 = { x:cx - Math.cos(a)*R*k, z:-Math.sin(a), y:y + (1-prog)*40, c:cor[1], k };
