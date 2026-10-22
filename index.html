@@ -230,32 +230,27 @@ fbq('track','PageView');
   /* ---------- Planos ---------- */
   #planos{scroll-margin-top:60px;padding-top:0}
   .planos-intro{font-size:12px;font-style:italic;color:rgba(246,248,236,.7);text-align:center}
-  .planos{display:grid;grid-template-columns:1fr 1.15fr;gap:24px;max-width:860px;margin:28px auto 0;align-items:stretch}
+  .planos{display:grid;grid-template-columns:1fr;gap:24px;max-width:500px;margin:28px auto 0;align-items:stretch}
   .plano{border-radius:10px;padding:28px 24px;display:flex;flex-direction:column;height:100%;position:relative}
-  .plano.basico{background:var(--verde-card);border:1.5px solid rgba(246,248,236,.2)}
   .plano.premium{background:var(--creme-claro);color:var(--tinta);border:2px solid var(--amarelo);box-shadow:6px 6px 0 0 var(--amarelo)}
   .plano .badge{position:absolute;top:-14px;left:50%;translate:-50% 0;white-space:nowrap;background:var(--verde-escuro);color:var(--amarelo);border:1.5px solid var(--tinta);border-radius:999px;padding:4px 16px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.16em}
   .plano .nome{font-family:'Playfair Display',serif;font-style:italic;font-weight:700;font-size:14px}
-  .plano.basico .nome{color:var(--amarelo)} .plano.premium .nome{color:var(--verde)}
+  .plano.premium .nome{color:var(--verde)}
   .plano h3{font-family:'Playfair Display',serif;font-weight:800;font-size:24px;margin-top:4px;line-height:1.15}
   .plano .breve{margin-top:8px;font-size:12px;color:rgba(246,248,236,.65)}
   .plano .de{margin-top:24px;font-size:12px;opacity:.6}
   .plano .preco{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(36px,5vw,48px);line-height:1.05}
-  .plano.basico .preco{color:var(--amarelo)} .plano.premium .preco{color:var(--verde)}
+  .plano.premium .preco{color:var(--verde)}
   .plano .unico{margin-top:4px;font-size:11px;opacity:.55}
   .plano ul{list-style:none;margin-top:22px;display:flex;flex-direction:column;gap:10px}
   .plano li{display:flex;align-items:flex-start;gap:10px;font-size:12.5px;line-height:1.4}
   .plano li svg{width:16px;height:16px;flex-shrink:0;margin-top:1px}
-  .plano.basico li{color:rgba(246,248,236,.85)} .plano.basico li svg{color:var(--amarelo)}
-  .plano.basico li.off,.plano.basico li.off svg{color:rgba(246,248,236,.4)}
   .plano.premium li{font-weight:500} .plano.premium li svg{color:var(--verde)}
   .plano .extra{margin-top:22px;padding-top:16px;border-top:1px solid rgba(28,36,16,.15);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.16em;color:rgba(28,36,16,.6)}
   .plano ul.bonus-lista{margin-top:12px;gap:8px}
   .plano ul.bonus-lista li{align-items:center;font-weight:400;color:rgba(28,36,16,.85)}
   .tag-bonus{flex-shrink:0;background:var(--amarelo);border:1px solid var(--tinta);border-radius:3px;padding:2px 5px;font-size:8px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--tinta)}
   .plano .cta-btn{margin-top:28px;width:100%;font-size:14px;padding:14px 20px}
-  .plano.basico .cta-btn{background:var(--creme-claro);color:var(--tinta);box-shadow:none}
-  .plano.basico .cta-btn:hover{transform:none;background:#fff}
   .plano .garantia-mini{margin-top:12px;text-align:center;font-size:11px;opacity:.55}
   .plano .espaco{flex:1}
 
@@ -289,30 +284,6 @@ fbq('track','PageView');
   footer{background:var(--verde-mais-escuro);border-top:1px solid rgba(242,184,28,.25);padding:32px 16px;text-align:center}
   footer .marca{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.2em;color:var(--amarelo)}
   footer .copy{margin-top:8px;font-size:11px;color:rgba(246,248,236,.5)}
-
-  /* ---------- Popup de oferta (upsell) ---------- */
-  .modal{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(10,20,4,.72);backdrop-filter:blur(3px);
-    opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
-  .modal.aberto{opacity:1;visibility:visible}
-  .modal-box{position:relative;width:100%;max-width:520px;max-height:calc(100vh - 32px);overflow:auto;background:var(--creme-claro);border:2px solid var(--tinta);border-radius:10px;box-shadow:8px 8px 0 0 var(--amarelo);
-    padding:34px 28px 24px;text-align:center;transform:translateY(30px) scale(.94) rotateX(10deg);transition:transform .4s cubic-bezier(.2,1.3,.4,1)}
-  .modal.aberto .modal-box{transform:none}
-  .modal .fechar{position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;border:1.5px solid var(--tinta);background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer}
-  .modal .fechar svg{width:14px;height:14px}
-  .modal .rotulo{display:inline-block;background:var(--amarelo);border:1.5px solid var(--tinta);border-radius:999px;box-shadow:var(--sombra-sm);padding:5px 16px;font-family:'Playfair Display',serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.18em}
-  .modal h2{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(26px,5vw,34px);line-height:1.12;margin-top:18px}
-  .modal .intro{margin-top:12px;font-size:14px;color:rgba(28,36,16,.7)}
-  .modal ul{list-style:none;text-align:left;margin:22px auto 0;max-width:380px;display:flex;flex-direction:column;gap:12px}
-  .modal li{display:flex;align-items:center;gap:12px;font-size:14px;font-weight:600}
-  .modal li i{flex-shrink:0;width:22px;height:22px;border-radius:4px;background:var(--amarelo);border:1.5px solid var(--tinta);display:flex;align-items:center;justify-content:center}
-  .modal li i svg{width:13px;height:13px}
-  .modal .de{margin-top:24px;font-size:13px;color:rgba(28,36,16,.55)}
-  .modal .preco{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(46px,9vw,60px);line-height:1;color:var(--verde)}
-  .modal .cta-btn{width:100%;margin-top:20px;font-size:14px;padding:16px 18px}
-  .modal .nao{display:block;margin-top:14px;font-size:12px;color:rgba(28,36,16,.55);text-decoration:underline;text-underline-offset:3px}
-  .modal .nao:hover{color:var(--tinta)}
-  .confete{position:absolute;width:10px;height:14px;top:-10px;border:1px solid var(--tinta);pointer-events:none;animation:cair 1.6s ease-in forwards}
-  @keyframes cair{to{transform:translateY(380px) rotate(540deg);opacity:0}}
 
   /* ---------- Entrada ao rolar ---------- */
   .reveal{opacity:0;translate:0 24px;transition:opacity .7s ease,translate .7s ease}
@@ -535,36 +506,17 @@ fbq('track','PageView');
   </div>
 </section>
 
-<!-- ============ PLANOS (R$ 10 primeiro) ============ -->
+<!-- ============ PLANO ============ -->
 <section class="escuro" id="planos">
   <div class="wrap">
     <p class="planos-intro">Acesso vitalício, pagamento único e liberação imediata no seu e-mail.</p>
     <div class="planos">
-      <div class="plano basico">
-        <span class="nome">Plano Degustação</span>
-        <h3>10 Revistas Biológicas</h3>
-        <p class="breve">Ideal para quem deseja experimentar o material de ponta a ponta.</p>
-        <p class="de">De <s>R$ 19,90</s> por</p>
-        <p class="preco">R$ 10,00</p>
-        <p class="unico">Pagamento único, sem mensalidade</p>
-        <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>10 Revistas Biológicas Selecionadas</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Arquivos em Alta Resolução (PDF)</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Pronto para imprimir em folha A4</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Acesso vitalício em 1 clique</li>
-          <li class="off"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>Sem os 5 Bônus Exclusivos</li>
-        </ul>
-        <div class="espaco"></div>
-        <button type="button" class="cta-btn" id="btn-basico">Quero o Plano Básico</button>
-        <p class="garantia-mini">Garantia incondicional de 7 dias</p>
-      </div>
-
       <div class="plano premium">
         <span class="badge">Mais escolhido pelos professores</span>
         <span class="nome">Coleção Completa Premium</span>
         <h3>+150 Revistas Biológicas + 5 Bônus</h3>
         <p class="de">De <s>R$ 297,00</s> por</p>
-        <p class="preco">R$ 69,90</p>
+        <p class="preco">R$ 29,90</p>
         <p class="unico">Pagamento único, sem mensalidade</p>
         <ul>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>+150 Revistas Biológicas completas</li>
@@ -582,7 +534,7 @@ fbq('track','PageView');
           <li><span class="tag-bonus">Bônus</span>Planejamento de Aulas com Revistas Biológicas</li>
         </ul>
         <div class="espaco"></div>
-        <a href="https://checkout.wiven.com.br/checkout/cmv5c0d6f258b01psb6wd360d?offer=XE8FHDO" data-checkout="premium" data-valor="69.90" class="cta-btn cta-verde pulse">
+        <a href="https://checkout.wiven.com.br/checkout/cmv5c0d6f258b01psb6wd360d?offer=XE8FHDO" data-checkout="premium" data-valor="29.90" class="cta-btn cta-verde pulse">
           Quero os +150 Revistas Biológicas
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
@@ -626,33 +578,9 @@ fbq('track','PageView');
   <p class="copy">© <span id="ano">2026</span> Revistas Biológicas • Todos os direitos reservados</p>
 </footer>
 
-<!-- ============ POPUP DE OFERTA (aparece ao clicar no plano de R$ 10) ============ -->
-<div class="modal" id="upsell" role="dialog" aria-modal="true" aria-labelledby="upsell-titulo">
-  <div class="modal-box">
-    <button type="button" class="fechar" data-fechar aria-label="Fechar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
-    <span class="rotulo">Oferta única desta página</span>
-    <h2 id="upsell-titulo">Leve a Coleção Premium completa por apenas <span class="verde" data-preco-upsell></span></h2>
-    <p class="intro">Em vez de levar só o Plano Degustação, garanta agora toda a coleção premium com um desconto exclusivo e todos os benefícios:</p>
-    <ul>
-      <li><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i>+150 Revistas Biológicas (15x mais conteúdo)</li>
-      <li><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i>Os 5 Super Bônus inclusos</li>
-      <li><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i>Atualizações futuras vitalícias</li>
-      <li><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i>Suporte prioritário ao educador</li>
-    </ul>
-    <p class="de">De <s>R$ 69,90</s> por</p>
-    <p class="preco" data-preco-upsell></p>
-    <a href="https://checkout.wiven.com.br/checkout/cmv5c0d6f258b01psb6wd360d?offer=K37FBAD" data-checkout="upsell" data-valor="57.00" class="cta-btn cta-verde">
-      <span>Sim! Quero a Coleção Premium por <span data-preco-upsell></span></span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-    </a>
-    <a href="https://checkout.wiven.com.br/checkout/cmv5fm0qs2bgs01ps4w9rlwf2?offer=N0K5JT5" data-checkout="basico" data-valor="10.00" class="nao">Não, obrigado. Quero apenas o Plano Degustação por R$ 10,00</a>
-  </div>
-</div>
-
 <script>
-/* Links de checkout ficam direto no HTML (data-checkout="premium" | "upsell" | "basico")
+/* Links de checkout ficam direto no HTML (data-checkout="premium")
    para a Utmify encontrar e repassar as UTMs automaticamente. */
-const PRECO_UPSELL = "R$ 57,00";
 
 /* Revistas do carrossel — cada faixa usa uma ordem diferente */
 const CAPAS = [
@@ -689,7 +617,7 @@ const FAQ = [
   ["Como recebo o acesso às Revistas Biológicas?","Assim que o pagamento é confirmado, você recebe um e-mail com o link de acesso imediato para baixar todo o material em PDF."],
   ["O material é alinhado à BNCC?","Sim. Toda a coleção foi desenvolvida seguindo as competências gerais e as habilidades específicas das Ciências da Natureza da BNCC."],
   ["Posso imprimir as revistas biológicas ou só usar no projetor?","Pode imprimir! Os PDFs estão em alta resolução, no tamanho A4, prontos para impressão — e também funcionam perfeitamente no projetor ou na tela."],
-  ["Qual é a diferença entre o Plano Básico e o Plano Completo?","O Plano Degustação inclui 10 revistas selecionadas. A Coleção Completa Premium inclui as +150 revistas, os 5 Super Bônus, atualizações futuras e suporte prioritário ao educador."],
+  ["O que está incluso na Coleção Completa Premium?","As +150 Revistas Biológicas completas, os 5 Super Bônus, atualizações futuras e suporte prioritário ao educador, tudo por R$ 29,90 em pagamento único."],
   ["O acesso tem prazo de validade?","Não. O acesso é vitalício: você paga uma única vez e o material é seu para sempre, incluindo as atualizações futuras da coleção."],
   ["Quais formas de pagamento são aceitas?","Cartão de crédito, Pix e boleto bancário, em ambiente 100% seguro. No Pix e no cartão, a liberação é imediata."],
 ];
@@ -739,25 +667,6 @@ faqEl.addEventListener('click', e => {
 document.querySelectorAll('[data-checkout]').forEach(a => a.addEventListener('click', () => {
   if (window.fbq) fbq('track', 'InitiateCheckout', { value: parseFloat(a.dataset.valor), currency: 'BRL', content_name: a.dataset.checkout });
 }));
-document.querySelectorAll('[data-preco-upsell]').forEach(el => el.textContent = PRECO_UPSELL);
-
-/* Popup de oferta ao clicar no plano de R$ 10 */
-const modal = $('#upsell');
-function abrirModal(){
-  modal.classList.add('aberto'); document.body.style.overflow = 'hidden';
-  const box = modal.querySelector('.modal-box'), cores = ['#f2b81c','#7bbf3a','#f28b82','#5bc0eb','#b388eb'];
-  for (let i = 0; i < 26; i++) {
-    const c = document.createElement('i'); c.className = 'confete';
-    c.style.left = Math.random()*100 + '%'; c.style.background = cores[i % cores.length];
-    c.style.animationDelay = Math.random()*.4 + 's'; c.style.animationDuration = 1.2 + Math.random()*.9 + 's';
-    box.appendChild(c); setTimeout(() => c.remove(), 2600);
-  }
-  setTimeout(() => modal.querySelector('[data-checkout="upsell"]').focus(), 300);
-}
-function fecharModal(){ modal.classList.remove('aberto'); document.body.style.overflow = ''; }
-$('#btn-basico').addEventListener('click', abrirModal);
-modal.addEventListener('click', e => { if (e.target === modal || e.target.closest('[data-fechar]')) fecharModal(); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') fecharModal(); });
 
 /* Contador até a meia-noite */
 const pad = n => String(n).padStart(2,'0');

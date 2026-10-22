@@ -14,8 +14,7 @@ Página de vendas das Revistas Biológicas (coleção para professores do Fundam
 - **Revistas do carrossel:** array `CAPAS` no script do `index.html` (`FAIXA_1` e `FAIXA_2` definem a ordem de cada faixa)
 - **Bônus:** array `BONUS`
 - **Perguntas frequentes:** array `FAQ`
-- **Links de checkout:** atributos `href` dos elementos com `data-checkout="premium" | "upsell" | "basico"`
-- **Preço do popup:** constante `PRECO_UPSELL`
+- **Link de checkout:** atributo `href` do botão com `data-checkout="premium"`
 
 ## Rastreamento
 
