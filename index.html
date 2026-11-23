@@ -215,14 +215,20 @@ fbq('track','PageView');
   .bonus{flex:0 1 calc((100% - 40px)/3);text-align:left;background:var(--verde-card);border:1.5px solid rgba(242,184,28,.35);border-radius:8px;padding:14px;display:flex;flex-direction:column;
     transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s;transform-style:preserve-3d}
   .bonus:hover{box-shadow:0 18px 30px rgba(0,0,0,.35)}
-  .bonus .img{aspect-ratio:16/9;width:100%;border-radius:4px;overflow:hidden;border:1.5px solid rgba(242,184,28,.5)}
+  .bonus .img{position:relative;aspect-ratio:1/1;max-width:100%;width:100%;border-radius:4px;overflow:hidden;border:1.5px solid rgba(242,184,28,.5)}
+  .bonus .num-bonus{position:absolute;bottom:8px;left:8px;background:var(--amarelo);color:var(--tinta);border:1.5px solid var(--tinta);border-radius:3px;padding:2px 7px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.12em}
+  .bonus h3{margin-top:14px}
   .bonus .img img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
   .bonus:hover .img img{transform:scale(1.06)}
-  .bonus .rot{margin-top:16px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.2em;color:var(--amarelo)}
   .bonus h3{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;margin-top:8px;line-height:1.25}
   .bonus .desc{margin-top:8px;flex:1;font-size:12px;color:rgba(246,248,236,.7);line-height:1.55}
   .bonus .rodape{margin-top:14px;padding-top:12px;border-top:1px solid rgba(246,248,236,.12);display:flex;flex-direction:column;gap:4px;font-size:11px;color:rgba(246,248,236,.6)}
-  .bonus .rodape b{color:var(--amarelo)}
+  .bonus .rodape{flex-direction:row;align-items:baseline;gap:10px}
+  .bonus .rodape s{font-size:13px;color:rgba(246,248,236,.5)}
+  .bonus .rodape b{color:var(--amarelo);font-family:'Playfair Display',serif;font-size:20px;font-weight:800}
+  .total-bonus{margin-top:14px;font-size:15px;color:rgba(246,248,236,.85)}
+  .total-bonus s{color:rgba(246,248,236,.55)}
+  .total-bonus b{color:var(--amarelo);text-transform:uppercase;letter-spacing:.06em}
   .presente-cena{width:min(340px,100%);margin:40px auto 26px;filter:drop-shadow(5px 6px 0 #0c1804)}
   .presente-cena svg{display:block;width:100%;height:auto;overflow:visible}
   .d-estrela{width:40px;height:40px}
@@ -309,7 +315,12 @@ fbq('track','PageView');
     .chip{font-size:13px}
     .capa{width:206px}
     .carrossel-track{gap:20px}
-    .bonus{flex-basis:100%}
+    .bonus-grid{gap:12px}
+    .bonus{flex-basis:calc((100% - 12px)/2);padding:9px}
+    .bonus h3{font-size:14px;margin-top:10px}
+    .bonus .desc{font-size:11px}
+    .bonus .rodape{flex-wrap:wrap;gap:6px}
+    .bonus .rodape b{font-size:17px}
     .d-borboleta{display:none}
     .d-lupa,.d-lampada,.d-globo,.d-dna2,.d-presente{display:none}
   }
@@ -345,7 +356,7 @@ fbq('track','PageView');
     <div class="chips">
       <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>100% Alinhado à BNCC</span>
       <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>PDF em Alta Resolução A4</span>
-      <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7M7.5 8a2.5 2.5 0 0 1 0-5C10 3 12 8 12 8s2-5 4.5-5a2.5 2.5 0 0 1 0 5"/></svg>Acesso Vitalício + 5 Bônus</span>
+      <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7M7.5 8a2.5 2.5 0 0 1 0-5C10 3 12 8 12 8s2-5 4.5-5a2.5 2.5 0 0 1 0 5"/></svg>Acesso Vitalício + 9 Bônus</span>
     </div>
 
     <a href="#previas" class="cta-btn cta-verde">
@@ -500,8 +511,9 @@ fbq('track','PageView');
       </svg>
     </div>
     <span class="selo">Exclusivo para esta oferta</span>
-    <h2 class="h2" style="margin-top:24px">Você também recebe <span class="amarelo">5 Super Bônus</span></h2>
+    <h2 class="h2" style="margin-top:24px">Você também recebe <span class="amarelo">9 Super Bônus</span></h2>
     <p class="sub" style="font-size:14px">Materiais de apoio criados para economizar ainda mais o seu tempo de preparação.</p>
+    <p class="total-bonus">Juntos valem <s data-total-bonus>R$ 241,10</s> e hoje saem <b>grátis</b> com a coleção.</p>
     <div class="bonus-grid" id="bonus"></div>
   </div>
 </section>
@@ -514,7 +526,7 @@ fbq('track','PageView');
       <div class="plano premium">
         <span class="badge">Mais escolhido pelos professores</span>
         <span class="nome">Coleção Completa Premium</span>
-        <h3>+150 Revistas Biológicas + 5 Bônus</h3>
+        <h3>+150 Revistas Biológicas + 9 Bônus</h3>
         <p class="de">De <s>R$ 297,00</s> por</p>
         <p class="preco">R$ 29,90</p>
         <p class="unico">Pagamento único, sem mensalidade</p>
@@ -525,14 +537,8 @@ fbq('track','PageView');
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Acesso vitalício + atualizações futuras</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Suporte prioritário ao educador</li>
         </ul>
-        <p class="extra">Você recebe + 5 Bônus</p>
-        <ul class="bonus-lista">
-          <li><span class="tag-bonus">Bônus</span>Guia de Acesso e Download</li>
-          <li><span class="tag-bonus">Bônus</span>Guia de Impressão Perfeita</li>
-          <li><span class="tag-bonus">Bônus</span>Guia de Utilização Pedagógica</li>
-          <li><span class="tag-bonus">Bônus</span>Índice Mestre e Organização da Coleção</li>
-          <li><span class="tag-bonus">Bônus</span>Planejamento de Aulas com Revistas Biológicas</li>
-        </ul>
+        <p class="extra">Você recebe + 9 Bônus</p>
+        <ul class="bonus-lista" id="bonus-lista"></ul>
         <div class="espaco"></div>
         <a href="https://checkout.wiven.com.br/checkout/cmv5c0d6f258b01psb6wd360d?offer=XE8FHDO" data-checkout="premium" data-valor="29.90" class="cta-btn cta-verde pulse">
           Quero os +150 Revistas Biológicas
@@ -601,27 +607,26 @@ const FAIXA_1 = [0,1,2,3,4,5,6,7,8,9,10,11];
 const FAIXA_2 = [8,4,11,2,9,6,0,10,3,7,1,5];
 
 const BONUS = [
-  { img:"bonus-01", rot:"Bônus 01", titulo:"Guia de Acesso e Download",
-    desc:"Vídeo ensinando passo a passo como acessar, baixar e salvar as +150 Revistas Biológicas no celular ou computador.", formato:"Vídeo de 2 a 3 minutos + guia ilustrado em PDF" },
-  { img:"bonus-02", rot:"Bônus 02", titulo:"Guia de Impressão Perfeita",
-    desc:"Tutorial mostrando como imprimir as revistas em A4, ajustar margens, escolher papel e configurar a impressora para economizar tinta.", formato:"Vídeo de 3 minutos + checklist visual" },
-  { img:"bonus-03", rot:"Bônus 03", titulo:"Guia de Utilização Pedagógica",
-    desc:"Vídeo explicando como transformar uma edição de revista em uma aula com leitura, discussão, atividades e revisão do conteúdo.", formato:"Vídeo de 5 minutos + roteiro de aula ilustrado" },
-  { img:"bonus-04", rot:"Bônus 04", titulo:"Índice Mestre e Organização da Coleção",
-    desc:"Tutorial mostrando como localizar rapidamente as revistas por assunto, ano escolar e conteúdo de Biologia, sem perder tempo procurando arquivos.", formato:"Vídeo de 2 minutos + índice navegável em PDF" },
-  { img:"bonus-05", rot:"Bônus 05", titulo:"Planejamento de Aulas com Revistas Biológicas",
-    desc:"Vídeo demonstrando como escolher revistas para cada conteúdo e montar sequências de aulas durante o bimestre.", formato:"Vídeo passo a passo + planner do bimestre" },
+  { img:"slides",         titulo:"Slides de Biologia",            desc:"Apresente cada assunto em sala com slides prontos e editáveis.", de:32.90 },
+  { img:"videos",         titulo:"Vídeos explicativos",           desc:"Como conduzir cada aventura, passo a passo.",                    de:29.90 },
+  { img:"atividades",     titulo:"+1.500 Atividades de Biologia", desc:"Prontas e com gabarito, para qualquer turma.",                   de:34.90 },
+  { img:"mapas-mentais",  titulo:"+400 Mapas Mentais",            desc:"Sistemas, seres vivos e ecologia para revisão rápida.",          de:29.90 },
+  { img:"plano-anual",    titulo:"Plano de aula anual",           desc:"Planos prontos e editáveis, alinhados à BNCC.",                  de:24.90 },
+  { img:"kit-emergencia", titulo:"Kit aula de emergência",        desc:"Chegou sem aula preparada? Aula completa em um clique.",         de:22.90 },
+  { img:"dinamicas",      titulo:"+700 Dinâmicas de Biologia",    desc:"Jogos, debates e desafios para animar as aulas.",                de:17.90 },
+  { img:"flashcards",     titulo:"Flashcards de Biologia",        desc:"Fixação rápida de conceitos, estruturas e processos.",           de:19.90 },
+  { img:"simulados",      titulo:"Simulados prontos",             desc:"Estilo ENEM e vestibular, com gabarito.",                        de:27.90 },
 ];
 
 const FAQ = [
   ["Como recebo o acesso às Revistas Biológicas?","Assim que o pagamento é confirmado, você recebe um e-mail com o link de acesso imediato para baixar todo o material em PDF."],
   ["O material é alinhado à BNCC?","Sim. Toda a coleção foi desenvolvida seguindo as competências gerais e as habilidades específicas das Ciências da Natureza da BNCC."],
   ["Posso imprimir as revistas biológicas ou só usar no projetor?","Pode imprimir! Os PDFs estão em alta resolução, no tamanho A4, prontos para impressão — e também funcionam perfeitamente no projetor ou na tela."],
-  ["O que está incluso na Coleção Completa Premium?","As +150 Revistas Biológicas completas, os 5 Super Bônus, atualizações futuras e suporte prioritário ao educador, tudo por R$ 29,90 em pagamento único."],
+  ["O que está incluso na Coleção Completa Premium?","As +150 Revistas Biológicas completas, os 9 Super Bônus, atualizações futuras e suporte prioritário ao educador, tudo por R$ 29,90 em pagamento único."],
   ["O acesso tem prazo de validade?","Não. O acesso é vitalício: você paga uma única vez e o material é seu para sempre, incluindo as atualizações futuras da coleção."],
   ["Quais formas de pagamento são aceitas?","Cartão de crédito, Pix e boleto bancário, em ambiente 100% seguro. No Pix e no cartão, a liberação é imediata."],
 ];
-const FAIXA = ["5 Bônus","Liberação imediata no e-mail","+150 Revistas Biológicas","100% Alinhado à BNCC","PDF em alta resolução A4","Acesso vitalício"];
+const FAIXA = ["9 Bônus","Liberação imediata no e-mail","+150 Revistas Biológicas","100% Alinhado à BNCC","PDF em alta resolução A4","Acesso vitalício"];
 
 /* ========================= RENDER ========================= */
 const $ = s => document.querySelector(s);
@@ -640,14 +645,18 @@ const capaHTML = c => `
   $(id).innerHTML = html + html;   // duplicado para loop contínuo
 });
 
-$('#bonus').innerHTML = BONUS.map(b => `
+const brl = v => v.toLocaleString('pt-BR', { style:'currency', currency:'BRL' });
+$('#bonus').innerHTML = BONUS.map((b, i) => `
   <div class="bonus reveal" data-tilt>
-    <div class="img"><img src="images/bonus/${b.img}.webp" alt="${b.rot} — ${b.titulo}" loading="lazy" width="900" height="506"></div>
-    <span class="rot">${b.rot}</span>
+    <div class="img"><img src="images/bonus/${b.img}.webp" alt="${b.titulo}" loading="lazy" width="520" height="520"><span class="num-bonus">Bônus ${String(i + 1).padStart(2,'0')}</span></div>
     <h3>${b.titulo}</h3>
     <p class="desc">${b.desc}</p>
-    <div class="rodape"><span>— ${b.formato}</span><b>Incluso no Plano</b></div>
+    <div class="rodape"><s>${brl(b.de)}</s><b>Grátis</b></div>
   </div>`).join('');
+$('#bonus-lista').innerHTML = BONUS.map(b => `<li><span class="tag-bonus">Bônus</span>${b.titulo}</li>`).join('');
+const totalBonus = BONUS.reduce((t, b) => t + b.de, 0);
+document.querySelectorAll('[data-total-bonus]').forEach(el => el.textContent = brl(totalBonus));
+document.querySelectorAll('[data-qtd-bonus]').forEach(el => el.textContent = BONUS.length);
 
 const faqEl = $('#faq');
 faqEl.innerHTML = FAQ.map(([q, a], i) => `
@@ -756,14 +765,16 @@ const animadores = [];
   });
 })();
 
-/* 3) Caixa de presente: os 5 bônus caem dentro e a tampa fecha */
+/* 3) Caixa de presente: os bônus caem dentro e a tampa fecha */
 (() => {
   const cena = document.getElementById('presente'); if (!cena) return;
   const NS = 'http://www.w3.org/2000/svg', grupo = cena.querySelector('#cartoes'),
         tampa = cena.querySelector('#tampa'), caixa = cena.querySelector('#caixa'),
         brilhos = cena.querySelector('#brilhos'), boca = cena.querySelector('#boca');
-  const cores = ['#7bbf3a','#5bc0eb','#f28b82','#b388eb','#f6f8ec'];
-  const origens = [[30,20],[310,10],[50,-40],[290,-50],[170,-80]];
+  const paleta = ['#7bbf3a','#5bc0eb','#f28b82','#b388eb','#f6f8ec'];
+  const cores = BONUS.map((_, i) => paleta[i % paleta.length]);
+  const origens = cores.map((_, i) => [i % 2 ? 300 - (i % 3) * 20 : 40 + (i % 3) * 20, 20 - i * 14]);
+  const passo = 0.62 / cores.length;
   const cards = cores.map((cor, i) => {
     const g = document.createElementNS(NS, 'g');
     g.innerHTML = `<rect x="-30" y="-21" width="60" height="42" rx="4" fill="${cor}" stroke="#1c2410" stroke-width="3"/>
@@ -780,8 +791,8 @@ const animadores = [];
     const ang = -118 * abre * (1 - fecha);
     tampa.setAttribute('transform', `rotate(${ang} 88 138)`);
     cards.forEach((c, i) => {
-      const ini = 0.12 + i * 0.12, q = clamp((p - ini) / 0.2);
-      const [sx, sy] = origens[i], ex = 170 + (i - 2) * 6, ey = 178;
+      const ini = 0.12 + i * passo, q = clamp((p - ini) / 0.16);
+      const [sx, sy] = origens[i], ex = 170 + (i - (cores.length - 1) / 2) * 4, ey = 178;
       const t = suave(q);
       const x = sx + (ex - sx) * t, y = sy + (ey - sy) * t - Math.sin(t * Math.PI) * 50;
       c.setAttribute('transform', `translate(${x} ${y}) rotate(${(1 - t) * (i % 2 ? 160 : -160)}) scale(${1 - 0.35 * t})`);
