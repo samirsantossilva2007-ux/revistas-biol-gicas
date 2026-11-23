@@ -334,7 +334,19 @@ fbq('track','PageView');
   /* ---------- Responsivo ---------- */
   @media (max-width:820px){
     .etapas,.passos{grid-template-columns:1fr}
-    .planos{grid-template-columns:1fr;gap:36px}
+    .planos{grid-template-columns:1fr;gap:30px}
+    /* Plano de R$ 10 compacto no celular, para o Premium aparecer logo em seguida */
+    .plano.basico{display:grid;grid-template-columns:1fr auto;column-gap:12px;align-items:end;padding:16px 16px 14px;border-radius:8px}
+    .plano.basico .nome{grid-column:1/-1;font-size:12px}
+    .plano.basico h3{grid-column:1;grid-row:2;font-size:18px;margin-top:2px}
+    .plano.basico .breve,.plano.basico .unico,.plano.basico .espaco,.plano.basico .garantia-mini{display:none}
+    .plano.basico .de{grid-column:2;grid-row:2;margin:0;text-align:right;font-size:11px;align-self:start}
+    .plano.basico .preco{grid-column:2;grid-row:3;font-size:30px;text-align:right;margin-top:-4px}
+    .plano.basico h3{align-self:center}
+    .plano.basico ul{grid-column:1/-1;grid-row:4;display:grid;grid-template-columns:1fr 1fr;gap:6px 10px;margin-top:10px}
+    .plano.basico li{font-size:11px;gap:6px}
+    .plano.basico li svg{width:13px;height:13px}
+    .plano.basico .cta-btn{grid-column:1/-1;grid-row:5;margin-top:12px;padding:11px 16px;font-size:12px}
     .bonus{flex-basis:calc((100% - 20px)/2)}
     section{padding:64px 0}
     .d-dna{width:70px;height:150px;left:-14px} .d-celula{width:84px;height:84px;right:-14px}
