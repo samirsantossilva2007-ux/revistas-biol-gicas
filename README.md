@@ -9,6 +9,12 @@ Página de vendas das Revistas Biológicas (coleção para professores do Fundam
 - `images/capas/` — capas do carrossel
 - `images/bonus/` — imagens dos 5 bônus
 
+## Acesso por dispositivo
+
+O `index.html` traz um bloqueio no topo do `<head>`: celulares e tablets veem a página
+normalmente; computadores veem uma tela 404. Para desativar, remova o bloco comentado
+com "Compatibilidade" e o `<div id="desktop-404-screen">`.
+
 ## Onde editar
 
 - **Revistas do carrossel:** array `CAPAS` no script do `index.html` (`FAIXA_1` e `FAIXA_2` definem a ordem de cada faixa)

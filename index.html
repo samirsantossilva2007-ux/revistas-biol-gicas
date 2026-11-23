@@ -3,6 +3,54 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Compatibilidade: celulares e tablets exibem a pagina normalmente; computadores veem 404. -->
+<script>
+(function () {
+  var ua = (navigator.userAgent || "").toLowerCase();
+  var uaMobile = /android|iphone|ipad|ipod|iemobile|opera mini|blackberry|windows phone|mobile|tablet|silk|kindle/.test(ua);
+  var clientMobile = !!(navigator.userAgentData && navigator.userAgentData.mobile);
+
+  // iPads que usam identificacao de Mac no Safari.
+  var isIPad = ua.indexOf("ipad") !== -1 ||
+    ((ua.indexOf("macintosh") !== -1 || ua.indexOf("mac os x") !== -1) && navigator.maxTouchPoints > 1);
+
+  // Plano B para navegadores mobile configurados como "versao para computador".
+  var hasTouch = (navigator.maxTouchPoints || 0) > 0 || ("ontouchstart" in window);
+  var smallSide = Math.min(screen.width || window.innerWidth, screen.height || window.innerHeight);
+  var looksLikeDesktopOS = /windows nt|cros/.test(ua);
+  var touchTabletOrPhone = hasTouch && smallSide <= 1200 && !looksLikeDesktopOS;
+
+  var isPhoneOrTablet = uaMobile || clientMobile || isIPad || touchTabletOrPhone;
+  if (!isPhoneOrTablet) {
+    document.documentElement.classList.add("desktop-error-404");
+    document.addEventListener("DOMContentLoaded", function () {
+      document.title = "404";
+    });
+  }
+  // Nao altera a URL: antes a troca para /404 podia quebrar o acesso por links compartilhados.
+})();
+</script>
+<style>
+  html:not(.desktop-error-404) #desktop-404-screen { display: none !important; }
+  html.desktop-error-404 body { margin: 0 !important; background: #fff !important; color: #222 !important; overflow: hidden !important; }
+  html.desktop-error-404 body > :not(#desktop-404-screen) { display: none !important; }
+  html.desktop-error-404 #desktop-404-screen {
+    display: flex !important; min-height: 100vh !important; width: 100% !important;
+    align-items: center !important; justify-content: center !important; flex-direction: column !important;
+    background: #fff !important; color: #222 !important; text-align: center !important;
+    font-family: Arial, Helvetica, sans-serif !important;
+  }
+  html.desktop-error-404 #desktop-404-screen h1 {
+    color: #222 !important; font: normal 74px/1.1 Arial, Helvetica, sans-serif !important;
+    margin: 0 0 10px !important;
+  }
+  html.desktop-error-404 #desktop-404-screen p {
+    color: #555 !important; font: normal 17px/1.5 Arial, Helvetica, sans-serif !important;
+    margin: 0 !important;
+  }
+</style>
+
 <title>+150 Revistas Biológicas | Prontas pra Imprimir</title>
 <meta name="description" content="+150 Revistas Biológicas prontas pra imprimir — coleção exclusiva para professores do Fundamental II e Médio, 100% alinhada à BNCC.">
 <meta name="theme-color" content="#1d3a0c">
@@ -371,6 +419,10 @@ fbq('track','PageView');
 </style>
 </head>
 <body>
+<div id="desktop-404-screen" role="main" aria-label="Página não encontrada">
+  <h1>404</h1>
+  <p>Página não encontrada</p>
+</div>
 <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=845454648512805&ev=PageView&noscript=1"></noscript>
 
 <!-- ============ BARRA FIXA ============ -->
